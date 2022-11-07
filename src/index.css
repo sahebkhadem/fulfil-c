@@ -88,3 +88,20 @@ select {
 		scroll-behavior: auto !important;
 	}
 }
+
+.page {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-grow: 1;
+	padding: 2rem 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0 30px var(--color-bg) inset !important;
+	-webkit-text-fill-color: var(--text-base) !important;
+}
