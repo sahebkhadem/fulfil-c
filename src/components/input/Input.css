@@ -72,3 +72,54 @@
 	margin-left: 0.3rem;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Show password button */
+.input-container button {
+	display: flex;
+	position: absolute;
+	top: 0.35rem;
+	left: 93%;
+	border: none;
+	border-radius: 5px;
+	padding: 0.5rem;
+	background-color: transparent;
+	color: var(--text-base);
+	cursor: pointer;
+	outline: none;
+	z-index: 3;
+}
+
+.pr {
+	padding-right: 3rem !important;
+}
+
+/* Breakpoints */
+@media only screen and (max-width: 700px) {
+	.input-container button {
+		left: 70%;
+	}
+}
+
+@media only screen and (min-width: 700px) {
+	.input-container button {
+		left: 80%;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.input-container button {
+		left: 85%;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.input-container button {
+		left: 88%;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.input-container button {
+		left: 92%;
+	}
+}
