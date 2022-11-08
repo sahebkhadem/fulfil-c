@@ -7,9 +7,11 @@
 	--button-primary: #2ecc71;
 	--button-primary-hover: #6ddb9c;
 	--button-primary-active: #208f4f;
+	--button-primary-disabled: #6ddb9c;
 	--button-secondary: #171717;
 	--button-secondary-hover: #2e2e2e;
 	--button-secondary-active: #101010;
+	--button-secondary-disabled: #2e2e2e;
 	--border-base: #2e2e2e;
 	--border-inverted: #d4d8d9;
 }
