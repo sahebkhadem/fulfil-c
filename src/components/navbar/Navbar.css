@@ -24,7 +24,7 @@ nav {
 	align-items: center;
 	color: var(--text-base);
 	text-decoration: none;
-	font-family: "Segoe UI";
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	margin: 0 0.5rem;
 }
