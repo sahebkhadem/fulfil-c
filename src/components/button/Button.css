@@ -1,0 +1,58 @@
+.button {
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: bold;
+	padding: 0.5rem;
+	cursor: pointer;
+}
+
+/* Primary button */
+.btn-primary {
+	background-color: var(--button-primary);
+	color: var(--text-inverted);
+	transition: background-color 0.1s linear;
+}
+.btn-primary:hover {
+	background-color: var(--button-primary-hover);
+	transition: background-color 0.1s linear;
+}
+.btn-primary:active {
+	background-color: var(--button-primary-active);
+	transition: background-color 0.1s linear;
+}
+.btn-primary:disabled {
+	background-color: var(--button-primary-disabled);
+	transition: background-color 0.1s linear;
+	cursor: default;
+}
+
+/* Secondary button */
+.btn-secondary {
+	background-color: var(--button-secondary);
+	color: var(--text-base);
+	transition: background-color 0.1s linear;
+}
+.btn-secondary:hover {
+	background-color: var(--button-secondary-hover);
+	transition: background-color 0.1s linear;
+}
+.btn-secondary:active {
+	background-color: var(--button-secondary-active);
+	transition: background-color 0.1s linear;
+}
+.btn-secondary:disabled {
+	background-color: var(--button-secondary-disabled);
+	transition: background-color 0.1s linear;
+	cursor: default;
+}
+
+/* Custom classes */
+.btn-full {
+	width: 100%;
+}
+
+.btn-content {
+	width: auto;
+}
