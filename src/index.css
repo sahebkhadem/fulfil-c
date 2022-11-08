@@ -4,6 +4,7 @@
 	--color-bg: #171717;
 	--color-primary: #2ecc71;
 	--color-error: #da0037;
+	--color-selection: #2ecc7094;
 	--button-primary: #2ecc71;
 	--button-primary-hover: #6ddb9c;
 	--button-primary-active: #208f4f;
@@ -91,6 +92,7 @@ select {
 	}
 }
 
+/* Unified page class for all pages */
 .page {
 	width: 100%;
 	display: flex;
@@ -100,10 +102,22 @@ select {
 	padding: 2rem 0;
 }
 
+/* Autofill backgroud color and color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
 	-webkit-box-shadow: 0 0 0 30px var(--color-bg) inset !important;
 	-webkit-text-fill-color: var(--text-base) !important;
+}
+
+/* Selection color */
+::-moz-selection {
+	background-color: var(--color-selection);
+	color: var(--text-base);
+}
+
+::selection {
+	background-color: var(--color-selection);
+	color: var(--text-base);
 }
