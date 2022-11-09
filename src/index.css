@@ -1,6 +1,9 @@
 :root {
 	--text-base: #ecf0f1;
 	--text-inverted: #171717;
+	--spinner-base: #ecf0f1;
+	--spinner-inverted: #171717;
+	--spinner-primary: #2ecc71;
 	--color-bg: #171717;
 	--color-primary: #2ecc71;
 	--color-error: #da0037;
