@@ -1,3 +1,10 @@
+input::placeholder {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 .input-container {
 	width: 100%;
 	display: flex;
@@ -60,7 +67,7 @@
 }
 
 /* Errors */
-.input-container .errors-container .error {
+.input-container .error {
 	display: flex;
 	align-items: center;
 	color: var(--color-error);

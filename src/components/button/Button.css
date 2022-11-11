@@ -9,6 +9,10 @@
 	font-weight: bold;
 	padding: 0.5rem;
 	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 /* Primary button */
