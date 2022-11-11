@@ -100,33 +100,43 @@ input::placeholder {
 	padding-right: 3rem !important;
 }
 
-/* Breakpoints */
-@media only screen and (max-width: 700px) {
-	.input-container button {
-		left: 70%;
-	}
-}
-
-@media only screen and (min-width: 700px) {
-	.input-container button {
-		left: 80%;
-	}
-}
-
-@media only screen and (min-width: 768px) {
-	.input-container button {
-		left: 85%;
-	}
-}
-
-@media only screen and (min-width: 992px) {
+@media only screen and (max-width: 400px) {
 	.input-container button {
 		left: 88%;
 	}
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 400px) {
+	.input-container button {
+		left: 90%;
+	}
+}
+
+@media only screen and (min-width: 500px) {
 	.input-container button {
 		left: 92%;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	.input-container button {
+		left: 90%;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.input-container button {
+		left: 92%;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.input-container button {
+		left: 90%;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.input-container button {
 	}
 }

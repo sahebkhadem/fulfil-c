@@ -1,5 +1,6 @@
 .form-container {
 	width: 33%;
+	padding: 1rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -15,4 +16,29 @@
 
 .form-container form {
 	width: 100%;
+}
+
+/* Breakpoints */
+@media only screen and (max-width: 600px) {
+	.form-container {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	.form-container {
+		width: 60%;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.form-container {
+		width: 40%;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.form-container {
+		width: 33%;
+	}
 }
