@@ -1,0 +1,56 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import authService from "./authService";
+
+// Get user from local storage
+const user = JSON.parse(localStorage.getItem("user"));
+
+const initialState = {
+	user: user ? user : null,
+	status: "idle", // "idle" || "pending" || "fulfilled" || "rejected"
+	error: { message: "", cause: "" }
+};
+
+// Register user
+export const register = createAsyncThunk("user/register", async (user, thunkAPI) => {
+	try {
+		return await authService.register(user);
+	} catch (error) {
+		console.log(error);
+		return thunkAPI.rejectWithValue({ message: error.response.data.message, cause: error.response.data.cause });
+	}
+});
+
+export const authSlice = createSlice({
+	name: "auth",
+	initialState,
+	reducers: {
+		reset: (state) => {
+			state.user = null;
+			state.status = "idle";
+			state.error = { message: "", cause: "" };
+		}
+	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(register.pending, (state) => {
+				state.status = "pending";
+			})
+			.addCase(register.fulfilled, (state, action) => {
+				state.user = action.payload;
+				state.status = "fulfilled";
+			})
+			.addCase(register.rejected, (state, action) => {
+				state.status = "rejected";
+				state.error = { message: action.payload.message, cause: action.payload.cause };
+			});
+	}
+});
+
+// Selectors
+export const getUser = (state) => state.auth.user;
+export const getAuthStatus = (state) => state.auth.status;
+export const getAuthError = (state) => state.auth.error;
+
+export const { reset } = authSlice.actions;
+
+export default authSlice.reducer;
