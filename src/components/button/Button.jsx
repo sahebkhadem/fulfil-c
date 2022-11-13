@@ -5,9 +5,17 @@ import { Link } from "react-router-dom";
 import "./Button.css";
 
 // Normal button
-export function Button({ color = "primary", width = "content", clickHandler = () => {}, disabled = false, children }) {
+export function Button({
+	color = "primary",
+	width = "content",
+	clickHandler = () => {},
+	icon = null,
+	disabled = false,
+	children
+}) {
 	return (
 		<button type="button" className={`button btn-${color} btn-${width}`} onClick={clickHandler} disabled={disabled}>
+			{icon && <span>{icon}</span>}
 			{children}
 		</button>
 	);
@@ -17,14 +25,16 @@ Button.propTypes = {
 	color: PropTypes.string,
 	width: PropTypes.string,
 	clickHandler: PropTypes.func,
+	icon: PropTypes.node,
 	disabled: PropTypes.bool,
 	children: PropTypes.node
 };
 
 // Submit button
-export function Submit({ color = "primary", width = "content", disabled = false, children }) {
+export function Submit({ color = "primary", width = "content", icon = null, disabled = false, children }) {
 	return (
 		<button type="submit" className={`button btn-${color} btn-${width}`} disabled={disabled}>
+			{icon && <span>{icon}</span>}
 			{children}
 		</button>
 	);
@@ -33,14 +43,24 @@ export function Submit({ color = "primary", width = "content", disabled = false,
 Button.propTypes = {
 	color: PropTypes.string,
 	width: PropTypes.string,
+	icon: PropTypes.node,
 	disabled: PropTypes.bool,
 	children: PropTypes.node
 };
 
 // Link button
-export function LinkButton({ to = "", target = "", color = "primary", width = "content", disabled = false, children }) {
+export function LinkButton({
+	to = "",
+	target = "",
+	color = "primary",
+	width = "content",
+	icon = null,
+	disabled = false,
+	children
+}) {
 	return (
 		<Link to={to} target={target} className={`button btn-${color} btn-${width}`} disabled={disabled}>
+			{icon && <span>{icon}</span>}
 			{children}
 		</Link>
 	);
@@ -51,6 +71,7 @@ LinkButton.propTypes = {
 	target: PropTypes.string,
 	color: PropTypes.string,
 	width: PropTypes.string,
+	icon: PropTypes.node,
 	disabled: PropTypes.bool,
 	children: PropTypes.node
 };

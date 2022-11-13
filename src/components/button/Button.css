@@ -37,6 +37,12 @@
 	cursor: default;
 }
 
+.button span {
+	margin-left: 0.3rem;
+	margin-right: 0.3rem;
+	margin-top: 0.2rem;
+}
+
 /* Secondary button */
 .btn-secondary {
 	background-color: var(--button-secondary);

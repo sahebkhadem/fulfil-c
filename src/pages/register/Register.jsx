@@ -113,8 +113,11 @@ function Register() {
 					errors={confirmPasswordErrors}
 				/>
 
-				<Submit width="full" disabled={authStatus === "pending" ? true : false}>
-					{authStatus === "pending" && <Spinner size="sm" color="inverted" />}
+				<Submit
+					width="full"
+					icon={authStatus === "pending" && <Spinner size="sm" color="inverted" />}
+					disabled={authStatus === "pending" ? true : false}
+				>
 					{authStatus === "pending" ? "Registering..." : "Register"}
 				</Submit>
 
