@@ -3,18 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // Redux
-import { getAuthStatus, getAuthError, register, reset } from "../../features/auth/authSlice";
+import { getAuthStatus, getAuthError, login, reset } from "../../features/auth/authSlice";
 
 // Components
 import Form from "../../layouts/form/Form";
 import { TextInput, PasswordInput } from "../../components/input/Input";
-import { Submit, LinkButton } from "../../components/button/Button";
+import { LinkButton, Submit } from "../../components/button/Button";
 import Spinner from "../../components/spinner/Spinner";
 
 // Validators
 import usernameValidator from "../../validators/usernameValidator";
 import passwordValidator from "../../validators/passwordValidator";
-import confirmPasswordValidator from "../../validators/confirmPasswordValidator";
 
 function Register() {
 	const navigate = useNavigate();
@@ -31,13 +30,11 @@ function Register() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [usernameErrors, setUsernameErrors] = useState([]);
 	const [passwordErrors, setPasswordErrors] = useState([]);
-	const [confirmPasswordErrors, setConfirmPasswordErrors] = useState([]);
 
 	const changeHandler = (event) => {
 		// Clear errors
 		if (event.target.name === "username" && usernameErrors) setUsernameErrors([]);
 		if (event.target.name === "password" && passwordErrors) setPasswordErrors([]);
-		if (event.target.name === "confirmPassword" && confirmPasswordErrors) setConfirmPasswordErrors([]);
 
 		// Get form data
 		const data = { ...formData, [event.target.name]: event.target.value };
@@ -54,7 +51,6 @@ function Register() {
 		// Validate form
 		const usernameValidationError = usernameValidator(formData.username, "login");
 		const passwordValidationError = passwordValidator(formData.password, "login");
-		const confirmPasswordValidationError = confirmPasswordValidator(formData.confirmPassword, formData.password);
 		if (usernameValidationError || passwordValidationError) {
 			// Validate username
 			if (usernameValidationError) {
@@ -66,15 +62,10 @@ function Register() {
 				setPasswordErrors([passwordValidationError]);
 			}
 
-			// Validate confirm password
-			if (confirmPasswordValidationError) {
-				setConfirmPasswordErrors([confirmPasswordValidationError]);
-			}
-
 			return;
 		}
 
-		dispatch(register(formData));
+		dispatch(login(formData));
 	};
 
 	useEffect(() => {
@@ -83,12 +74,11 @@ function Register() {
 
 	useEffect(() => {
 		if (localStorage.getItem("user")) navigate("/");
-	}, [navigate]);
+	}, [navigate, authStatus]);
 
 	useEffect(() => {
 		if (authError.cause === "username") setUsernameErrors([authError.message]);
 		if (authError.cause === "password") setPasswordErrors([authError.message]);
-		if (authError.cause === "confirmPassword") setConfirmPasswordErrors([authError.message]);
 	}, [authError]);
 
 	return (
@@ -103,23 +93,14 @@ function Register() {
 					showPassword={showPassword}
 					errors={passwordErrors}
 				/>
-				<PasswordInput
-					name="confirmPassword"
-					changeHandler={changeHandler}
-					passwordToggler={passwordToggler}
-					label="Confirm password"
-					showPassword={showPassword}
-					confirm={true}
-					errors={confirmPasswordErrors}
-				/>
 
 				<Submit width="full" disabled={authStatus === "pending" ? true : false}>
 					{authStatus === "pending" && <Spinner size="sm" color="inverted" />}
-					{authStatus === "pending" ? "Registering..." : "Register"}
+					{authStatus === "pending" ? "Logging in..." : "Login"}
 				</Submit>
 
-				<LinkButton to="/login" color="secondary" width="full">
-					Already have an account?
+				<LinkButton to="/register" color="secondary" width="full">
+					Don't have an account?
 				</LinkButton>
 			</Form>
 		</div>
