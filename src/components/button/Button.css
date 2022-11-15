@@ -17,6 +17,26 @@
 	text-decoration: none;
 }
 
+/* Color setter button */
+.color-btn {
+	border: 1px var(--border-base) solid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem;
+	border-radius: 50%;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin: 0 0.5rem;
+}
+
+.icon-visibility {
+	visibility: hidden;
+}
+
 /* Primary button */
 .btn-primary {
 	background-color: var(--button-primary);
@@ -70,4 +90,30 @@
 
 .btn-content {
 	width: auto;
+}
+
+/* Color setter button colors */
+.clr-default {
+	background-color: var(--color-todo-default);
+}
+.clr-white {
+	background-color: var(--color-todo-white);
+}
+.clr-gray {
+	background-color: var(--color-todo-gray);
+}
+.clr-red {
+	background-color: var(--color-todo-red);
+}
+.clr-yellow {
+	background-color: var(--color-todo-yellow);
+}
+.clr-green {
+	background-color: var(--color-todo-green);
+}
+.clr-blue {
+	background-color: var(--color-todo-blue);
+}
+.clr-purple {
+	background-color: var(--color-todo-purple);
 }

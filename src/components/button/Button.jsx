@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { FaCheckCircle } from "react-icons/fa";
 
 // CSS
 import "./Button.css";
@@ -74,4 +75,24 @@ LinkButton.propTypes = {
 	icon: PropTypes.node,
 	disabled: PropTypes.bool,
 	children: PropTypes.node
+};
+
+// Color setter button
+export function ColorButton({ color = "default", isSelcted = true, colorSetter = () => {} }) {
+	const setColor = () => {
+		colorSetter(color);
+	};
+
+	return (
+		<button type="button" className={`color-btn clr-${color}`} onClick={setColor}>
+			<div className={!isSelcted ? "icon-visibility" : ""}>
+				<FaCheckCircle />
+			</div>
+		</button>
+	);
+}
+
+Button.propTypes = {
+	color: PropTypes.string,
+	colorSetter: PropTypes.func
 };
