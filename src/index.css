@@ -1,5 +1,6 @@
 :root {
 	--text-base: #ecf0f1;
+	--text-muted: #8e9091;
 	--text-inverted: #171717;
 	--spinner-base: #ecf0f1;
 	--spinner-inverted: #171717;
@@ -8,6 +9,17 @@
 	--color-primary: #2ecc71;
 	--color-error: #da0037;
 	--color-selection: #2ecc7094;
+	--color-scrollbar: #8e90916a;
+	--color-scrollbar-hover: #a5a6a76a;
+	--color-scrollbar-active: #6365666a;
+	--color-todo-default: #171717;
+	--color-todo-white: #ecf0f1;
+	--color-todo-gray: #8e9091;
+	--color-todo-red: #ff5f5f;
+	--color-todo-yellow: #fffd5f;
+	--color-todo-green: #2ecc71;
+	--color-todo-blue: #5c80d3;
+	--color-todo-purple: #ac54d2;
 	--button-primary: #2ecc71;
 	--button-primary-hover: #6ddb9c;
 	--button-primary-active: #208f4f;
@@ -15,7 +27,7 @@
 	--button-secondary: #171717;
 	--button-secondary-hover: #2e2e2e;
 	--button-secondary-active: #101010;
-	--button-secondary-disabled: #2e2e2e;
+	--button-secondary-disabled: #2e2e4d;
 	--border-base: #2e2e2e;
 	--border-inverted: #d4d8d9;
 }
@@ -102,7 +114,7 @@ select {
 	flex-direction: column;
 	align-items: center;
 	flex-grow: 1;
-	padding: 2rem 0;
+	padding: 2rem 1rem;
 }
 
 /* Autofill backgroud color and color */
@@ -123,4 +135,34 @@ input:-webkit-autofill:active {
 ::selection {
 	background-color: var(--color-selection);
 	color: var(--text-base);
+}
+
+/* Custom scrollbar */
+/* width */
+.scrollbar::-webkit-scrollbar {
+	height: 5px;
+	margin-top: 5px;
+}
+
+/* Track */
+.scrollbar::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+/* Handle */
+.scrollbar::-webkit-scrollbar-thumb {
+	background-color: var(--color-scrollbar);
+	border-radius: 100px;
+}
+
+/* Handle on hover */
+.scrollbar::-webkit-scrollbar-thumb:hover {
+	cursor: pointer;
+	background-color: var(--color-scrollbar-hover);
+}
+
+/* Handle on active */
+.scrollbar::-webkit-scrollbar-thumb:active {
+	cursor: pointer;
+	background: var(--color-scrollbar-active);
 }
