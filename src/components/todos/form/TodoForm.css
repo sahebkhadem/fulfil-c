@@ -1,9 +1,9 @@
-form {
+.todo-form {
 	width: 33%;
 	padding: 1rem 1rem 0.5rem 1rem;
 	display: flex;
 	flex-direction: column;
-	background-color: var(--color-todo-default);
+	background-color: var(--color-bg);
 	border-radius: 5px;
 	border: 1px var(--border-base) solid;
 }
@@ -78,27 +78,38 @@ form {
 	color: var(--text-muted);
 }
 
-form .action-buttons {
+.todo-form .action-buttons {
 	display: flex;
 	justify-content: space-between;
 }
 
-form .error-message {
+.todo-form .error-message {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-	color: var(--color-error);
+	color: var(--color-danger);
 	margin-bottom: 1rem;
 }
 
-form .error-message p {
+.todo-form .error-message p {
 	margin-left: 0.5rem;
+}
+
+.todo-form .warning {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--text-muted);
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: small;
+	font-weight: bold;
+	margin: 1rem 0;
 }
 
 /* Breakpoints */
 @media only screen and (max-width: 600px) {
-	form {
+	.todo-form {
 		width: 100%;
 	}
 
@@ -108,7 +119,7 @@ form .error-message p {
 }
 
 @media only screen and (min-width: 600px) {
-	form {
+	.todo-form {
 		width: 60%;
 	}
 
@@ -118,7 +129,7 @@ form .error-message p {
 }
 
 @media only screen and (min-width: 992px) {
-	form {
+	.todo-form {
 		width: 40%;
 	}
 
@@ -128,7 +139,7 @@ form .error-message p {
 }
 
 @media only screen and (min-width: 1200px) {
-	form {
+	.todo-form {
 		width: 33%;
 	}
 

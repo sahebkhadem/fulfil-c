@@ -1,44 +1,36 @@
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { FaSave, FaPlus, FaExclamationCircle, FaInfoCircle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { FaSave, FaExclamationCircle } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 // Redux
-import { create, getTodosStatus, getTodosError, resetError, addLocalTodo } from "../../../features/todos/todoSlice";
 import { getUser } from "../../../features/auth/authSlice";
+import { resetError, getTodosStatus, getTodosError, updateLocalTodo, edit } from "../../../features/todos/todoSlice";
 
 // CSS
-import "./TodoForm.css";
+import "./TodoEditor.css";
 
 // Components
-import { Submit, Button, ColorButton } from "../../button/Button";
+import { Button, ColorButton, Submit } from "../../button/Button";
 import Spinner from "../../spinner/Spinner";
 
-function TodoForm() {
-	const [isOpen, setIsOpen] = useState(false);
-	const [formData, setFormData] = useState({
-		title: "",
-		todo: "",
-		tags: "",
-		color: "default"
-	});
-	const [isValid, setIsValid] = useState(true);
-
+function TodoEditor({ id, title, main, tags, color, cancelEditing }) {
 	const dispatch = useDispatch();
+
+	const [formData, setFormData] = useState({
+		_id: id,
+		title,
+		main,
+		tags,
+		color
+	});
+	const [textColor, setTextColor] = useState("dark");
+	const [isValid, setIsValid] = useState(true);
 
 	const isLoggedIn = useSelector(getUser);
 	const todoStatus = useSelector(getTodosStatus);
 	const todoError = useSelector(getTodosError);
-
-	const toggleForm = () => {
-		setFormData({
-			title: "",
-			main: "",
-			tags: "",
-			color: "black"
-		});
-		setIsOpen((previousState) => !previousState);
-	};
 
 	const changeHandler = (event) => {
 		// Clear errors
@@ -63,68 +55,52 @@ function TodoForm() {
 		}
 
 		if (!isLoggedIn) {
-			let newTodo = formData;
-
-			// Convert the space-separated tags list into an array
-			if (typeof newTodo.tags === "string") {
-				newTodo.tags = newTodo.tags.split(" ");
-			}
-
-			// Add an "id" to the todo
-			const todoWithId = { _id: `${newTodo.title}id${new Date().getTime().toString()}`, ...newTodo };
-
-			dispatch(addLocalTodo(todoWithId));
+			dispatch(updateLocalTodo(formData));
+			cancelEditing();
 			return;
 		}
 
-		dispatch(create(formData));
+		dispatch(edit(formData));
+		cancelEditing();
 	};
 
 	useEffect(() => {
-		if (todoStatus !== "rejected") {
-			setIsValid(true);
-			dispatch(resetError());
-		}
-	}, [todoStatus, dispatch]);
-
-	if (!isOpen) {
-		return (
-			<div className="placeholder" onClick={toggleForm}>
-				<p>Add a note...</p>
-				<FaPlus />
-			</div>
-		);
-	}
+		if (color === "black") setTextColor("light");
+		if (color === "white") setTextColor("dark");
+	}, [color]);
 
 	return (
-		<form onSubmit={submitHandler} className="todo-form">
-			{!isLoggedIn && (
-				<div className="warning">
-					<FaInfoCircle />
-					<p>Your notes will not be saved since you are not logged in!</p>
-				</div>
-			)}
+		<form onSubmit={submitHandler} className={`edit-form bg-${color}`}>
+			<input
+				type="text"
+				name="title"
+				placeholder="Title"
+				defaultValue={title}
+				className={`edit-title-input text-${textColor}`}
+				onChange={changeHandler}
+			/>
 
-			<input type="text" name="title" placeholder="Title" className="title-input" onChange={changeHandler} />
 			<span className="separator"></span>
 
 			<textarea
 				name="main"
 				cols="30"
 				rows="5"
-				className="todo-input"
-				placeholder="Add a note..."
+				defaultValue={main}
+				className={`edit-todo-input scrollbar text-${textColor}`}
 				onChange={changeHandler}
 			></textarea>
+
 			<span className="separator"></span>
 
 			<input
 				type="text"
 				name="tags"
-				placeholder="Tags (sperated with a space)"
-				className="tags-input"
+				defaultValue={tags.constructor === Array ? tags.join(" ") : tags}
+				className={`edit-tags-input text-${textColor}`}
 				onChange={changeHandler}
 			/>
+
 			<span className="separator"></span>
 
 			<div className="colors scrollbar">
@@ -163,6 +139,7 @@ function TodoForm() {
 					/>
 				</div>
 			</div>
+
 			<span className="separator"></span>
 
 			{!isValid && (
@@ -179,11 +156,11 @@ function TodoForm() {
 				</div>
 			)}
 
-			<div className="action-buttons">
-				<Button color="secondary" icon={<AiFillCloseCircle />} clickHandler={toggleForm}>
+			<div className="edit-actions">
+				<Button color="secondary" icon={<AiFillCloseCircle />} clickHandler={cancelEditing}>
 					Cancel
 				</Button>
-				<Submit icon={todoStatus === "pending" ? "" : <FaSave />}>
+				<Submit icon={todoStatus === "pending" ? "" : <FaSave />} disabled={todoStatus === "pending"}>
 					{todoStatus === "pending" && <Spinner size="sm" color="inverted" />}
 					{todoStatus === "pending" ? "Saving..." : "Save"}
 				</Submit>
@@ -192,4 +169,13 @@ function TodoForm() {
 	);
 }
 
-export default TodoForm;
+TodoEditor.propTypes = {
+	id: PropTypes.string,
+	title: PropTypes.string,
+	main: PropTypes.string,
+	tags: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+	color: PropTypes.string,
+	cancelEditing: PropTypes.func
+};
+
+export default TodoEditor;

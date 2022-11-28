@@ -70,7 +70,7 @@ input::placeholder {
 .input-container .error {
 	display: flex;
 	align-items: center;
-	color: var(--color-error);
+	color: var(--color-danger);
 	font-size: small;
 	padding-top: 0.5rem;
 }

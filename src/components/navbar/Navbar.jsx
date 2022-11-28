@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaSun, FaMoon } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../button/Button";
+
 // Assets
 import logo_light from "../../assets/img/logo_light.png";
+import logo_dark from "../../assets/img/logo.png";
 
 // Redux
-import { getUser, logout } from "../../features/auth/authSlice";
+import { getUser, logout, reset } from "../../features/auth/authSlice";
+import { resetTodos } from "../../features/todos/todoSlice";
+
+import { getTheme, toggleTheme } from "../../features/theme/themeSlice";
+
+// Hooks
+import useTheme from "../../hooks/useTheme";
 
 // CSS
 import "./Navbar.css";
@@ -15,11 +23,14 @@ function Navbar() {
 	const dispatch = useDispatch();
 
 	const user = useSelector(getUser);
+	const theme = useSelector(getTheme);
+
+	useTheme(theme);
 
 	return (
 		<nav>
 			<Link to="/">
-				<img src={logo_light} alt="Fulful logo" className="logo" />
+				<img src={theme === "dark" ? logo_light : logo_dark} alt="Fulfil logo" className="logo" />
 			</Link>
 
 			{/* Links */}
@@ -33,8 +44,22 @@ function Navbar() {
 					<FaGithub />
 				</a>
 
+				<button
+					className="theme-toggler"
+					onClick={() => dispatch(toggleTheme())}
+					title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+				>
+					{theme === "dark" ? <FaSun /> : <FaMoon />}
+				</button>
+
 				{user ? (
-					<Button className="nav-link" clickHandler={() => dispatch(logout())}>
+					<Button
+						clickHandler={() => {
+							dispatch(logout());
+							dispatch(reset());
+							dispatch(resetTodos());
+						}}
+					>
 						Logout
 					</Button>
 				) : (

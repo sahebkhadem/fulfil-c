@@ -14,7 +14,7 @@ export function TextInput({ name = "text", changeHandler = () => {}, label = "En
 				id={name}
 				onChange={changeHandler}
 				placeholder="Placeholder"
-				style={errors.length > 0 ? { borderColor: "var(--color-error)" } : {}}
+				style={errors.length > 0 ? { borderColor: "var(--color-danger)" } : {}}
 			/>
 			<label htmlFor={name}>{label}</label>
 			{errors.length > 0 && (
@@ -56,7 +56,7 @@ export function PasswordInput({
 				id={name}
 				onChange={changeHandler}
 				placeholder="Placeholder"
-				style={{ borderColor: errors.length > 0 && "var(--color-error)" }}
+				style={{ borderColor: errors.length > 0 && "var(--color-danger)" }}
 				className={!confirm ? "pr" : ""}
 			/>
 

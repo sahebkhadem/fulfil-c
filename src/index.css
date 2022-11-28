@@ -7,12 +7,12 @@
 	--spinner-primary: #2ecc71;
 	--color-bg: #171717;
 	--color-primary: #2ecc71;
-	--color-error: #da0037;
+	--color-danger: #da0037;
 	--color-selection: #2ecc7094;
 	--color-scrollbar: #8e90916a;
 	--color-scrollbar-hover: #a5a6a76a;
 	--color-scrollbar-active: #6365666a;
-	--color-todo-default: #171717;
+	--color-todo-black: #171717;
 	--color-todo-white: #ecf0f1;
 	--color-todo-gray: #8e9091;
 	--color-todo-red: #ff5f5f;
@@ -152,7 +152,7 @@ input:-webkit-autofill:active {
 /* Handle */
 .scrollbar::-webkit-scrollbar-thumb {
 	background-color: var(--color-scrollbar);
-	border-radius: 100px;
+	border-radius: 3px;
 }
 
 /* Handle on hover */

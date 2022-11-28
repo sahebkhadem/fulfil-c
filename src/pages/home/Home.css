@@ -1,1 +1,73 @@
+.page .todos-container {
+	width: 33%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1rem;
+}
 
+.page .todos-container p {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: transparent;
+	color: var(--text-muted);
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page .warning p {
+	height: 20px;
+	margin-left: 0.3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.scroll-to-top {
+	position: fixed;
+	top: 90%;
+	left: 90%;
+	padding: 1rem !important;
+}
+
+/* Breakpoints */
+@media only screen and (max-width: 300px) {
+	.scroll-to-top {
+		left: 77%;
+	}
+}
+
+@media only screen and (min-width: 300px) {
+	.scroll-to-top {
+		left: 77%;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.page .todos-container {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	.page .todos-container {
+		width: 60%;
+	}
+
+	.scroll-to-top {
+		left: 85%;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.page .todos-container {
+		width: 40%;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.page .todos-container {
+		width: 33%;
+	}
+}

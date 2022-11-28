@@ -1,0 +1,64 @@
+.list {
+	width: 100%;
+	margin: 1rem 0;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+/* List scrollbar */
+.list::-webkit-scrollbar {
+	width: 14px;
+}
+.list::-webkit-scrollbar-thumb {
+	background: transparent;
+	border-right: 10px var(--color-scrollbar) solid;
+	background-clip: padding-box;
+}
+.list::-webkit-scrollbar-thumb:hover {
+	background: transparent;
+	border-right: 10px var(--color-scrollbar-hover) solid;
+}
+.list::-webkit-scrollbar-thumb:active {
+	background: transparent;
+	border-right: 10px var(--color-scrollbar-active) solid;
+}
+
+.nothing {
+	width: 100%;
+	margin: 1rem 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--text-muted);
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.spinner-container {
+	margin: 2rem;
+}
+
+/* Breakpoints */
+@media only screen and (max-width: 600px) {
+	.list {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	.list {
+		width: 60%;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.list {
+		width: 40%;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.list {
+		width: 33%;
+	}
+}

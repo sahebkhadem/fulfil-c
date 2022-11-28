@@ -5,6 +5,10 @@ nav {
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 10rem;
+	position: sticky;
+	top: 0;
+	background-color: var(--color-bg);
+	z-index: 99;
 }
 
 .logo {
@@ -31,6 +35,29 @@ nav {
 
 .nav-link:hover {
 	text-decoration: underline;
+}
+
+.theme-toggler {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem;
+	margin-right: 1rem;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	border-radius: 50%;
+	background-color: transparent;
+	color: var(--text-base);
+	transition: background-color 0.1s linear;
+}
+.theme-toggler:hover {
+	transition: background-color 0.1s linear;
+	background-color: #00000043;
+}
+.theme-toggler:active {
+	transition: background-color 0.1s linear;
+	background-color: #00000043;
 }
 
 /* Breakpoints */
