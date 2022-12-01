@@ -13,7 +13,7 @@ import "./TodoItem.css";
 // Components
 import TodoEditor from "../editor/TodoEditor";
 
-function TodoItem({ id, title, main, tags, color }) {
+function TodoItem({ id, title, main, tags, color, innerRef }) {
 	const dispatch = useDispatch();
 
 	const isLoggedIn = useSelector(getUser);
@@ -44,7 +44,11 @@ function TodoItem({ id, title, main, tags, color }) {
 	}
 
 	return (
-		<div className={`todo-container bg-${color} text-${textColor}`} onClick={() => setIsEditing(true)}>
+		<div
+			className={`todo-container bg-${color} text-${textColor}`}
+			onClick={() => setIsEditing(true)}
+			ref={innerRef}
+		>
 			<div className="title-bar">
 				<h1>{title}</h1>
 				<div className="action-buttons">
@@ -66,7 +70,12 @@ TodoItem.propTypes = {
 	title: PropTypes.string,
 	main: PropTypes.string,
 	tags: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-	color: PropTypes.string
+	color: PropTypes.string,
+	innerRef: PropTypes.oneOfType([
+		PropTypes.number,
+		PropTypes.func,
+		PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+	])
 };
 
 export default TodoItem;

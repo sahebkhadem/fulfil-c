@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:5000/api/users";
 
-// Create new goal
+// Create new todo
 const createTodo = async (username, todo, token) => {
 	const config = {
 		headers: {
@@ -16,14 +16,14 @@ const createTodo = async (username, todo, token) => {
 };
 
 // Get user todos
-const getTodos = async (username, token) => {
+const getTodos = async (username, start, token) => {
 	const config = {
 		headers: {
 			Authorization: `Bearer ${token}`
 		}
 	};
 
-	const response = await axios.get(`${BASE_URL}/${username}/todos`, config);
+	const response = await axios.post(`${BASE_URL}/${username}/todos`, { start }, config);
 
 	return response.data;
 };

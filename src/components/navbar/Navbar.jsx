@@ -10,11 +10,10 @@ import logo_dark from "../../assets/img/logo.png";
 // Redux
 import { getUser, logout, reset } from "../../features/auth/authSlice";
 import { resetTodos } from "../../features/todos/todoSlice";
-
 import { getTheme, toggleTheme } from "../../features/theme/themeSlice";
 
 // Hooks
-import useTheme from "../../hooks/useTheme";
+import useTheme from "../../hooks/theme/useTheme";
 
 // CSS
 import "./Navbar.css";

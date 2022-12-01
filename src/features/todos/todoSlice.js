@@ -3,6 +3,7 @@ import todoService from "./todoService";
 
 const initialState = {
 	todos: [],
+	more: true,
 	status: "idle", // "idle" || "pending" || "fulfilled" || "rejected"
 	error: false
 };
@@ -21,9 +22,13 @@ export const create = createAsyncThunk("todo/create", async (todo, thunkAPI) => 
 });
 
 // Get user todos
-export const getAll = createAsyncThunk("todo/getAll", async (username, thunkAPI) => {
+export const getUserTodos = createAsyncThunk("todo/getUserTodos", async (start, thunkAPI) => {
 	try {
-		return await todoService.getTodos(username, thunkAPI.getState().auth.user.token);
+		return await todoService.getTodos(
+			thunkAPI.getState().auth.user.username,
+			start,
+			thunkAPI.getState().auth.user.token
+		);
 	} catch (error) {
 		return thunkAPI.rejectWithValue({ message: error.response.data.message, cause: error.response.data.cause });
 	}
@@ -68,17 +73,15 @@ export const todoSlice = createSlice({
 		deleteLocalTodo: (state, action) => {
 			const id = action.payload;
 			const newTodos = state.todos.filter((todo) => todo._id !== id);
-
 			state.todos = newTodos;
 		},
 		updateLocalTodo: (state, action) => {
 			const index = state.todos.findIndex((todo) => todo._id === action.payload._id);
-
-			console.log(index);
 			state.todos[index] = action.payload;
 		},
 		resetTodos: (state) => {
 			state.todos = [];
+			state.more = true;
 			state.status = "idle";
 			state.error = false;
 		}
@@ -97,14 +100,15 @@ export const todoSlice = createSlice({
 				state.status = "rejected";
 				state.error = true;
 			})
-			.addCase(getAll.pending, (state) => {
+			.addCase(getUserTodos.pending, (state) => {
 				state.status = "pending";
 			})
-			.addCase(getAll.fulfilled, (state, action) => {
-				state.todos = action.payload;
+			.addCase(getUserTodos.fulfilled, (state, action) => {
+				state.todos = state.todos.concat(action.payload.todos);
+				state.more = action.payload.more;
 				state.status = "fulfilled";
 			})
-			.addCase(getAll.rejected, (state) => {
+			.addCase(getUserTodos.rejected, (state) => {
 				state.status = "rejected";
 				state.error = true;
 			})
@@ -135,6 +139,7 @@ export const todoSlice = createSlice({
 
 // Selectors
 export const getTodos = (state) => state.todo.todos;
+export const hasMore = (state) => state.todo.more;
 export const getTodosStatus = (state) => state.todo.status;
 export const getTodosError = (state) => state.todo.error;
 
