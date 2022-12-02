@@ -3,6 +3,7 @@ import todoService from "./todoService";
 
 const initialState = {
 	todos: [],
+	localSearch: [],
 	more: true,
 	status: "idle", // "idle" || "pending" || "fulfilled" || "rejected"
 	error: false
@@ -22,11 +23,12 @@ export const create = createAsyncThunk("todo/create", async (todo, thunkAPI) => 
 });
 
 // Get user todos
-export const getUserTodos = createAsyncThunk("todo/getUserTodos", async (start, thunkAPI) => {
+export const getUserTodos = createAsyncThunk("todo/getUserTodos", async ({ start, query }, thunkAPI) => {
 	try {
 		return await todoService.getTodos(
 			thunkAPI.getState().auth.user.username,
 			start,
+			query,
 			thunkAPI.getState().auth.user.token
 		);
 	} catch (error) {
@@ -81,9 +83,20 @@ export const todoSlice = createSlice({
 		},
 		resetTodos: (state) => {
 			state.todos = [];
+			state.localSearch = [];
 			state.more = true;
-			state.status = "idle";
 			state.error = false;
+		},
+		search: (state, action) => {
+			const results = state.todos.filter((todo) => {
+				if (todo.title.includes(action.payload) || todo.tags.some((tag) => tag.includes(action.payload))) {
+					return true;
+				}
+
+				return false;
+			});
+
+			state.localSearch = results;
 		}
 	},
 	extraReducers: (builder) => {
@@ -139,10 +152,11 @@ export const todoSlice = createSlice({
 
 // Selectors
 export const getTodos = (state) => state.todo.todos;
+export const getLocalSearchResults = (state) => state.todo.localSearch;
 export const hasMore = (state) => state.todo.more;
 export const getTodosStatus = (state) => state.todo.status;
 export const getTodosError = (state) => state.todo.error;
 
-export const { resetError, addLocalTodo, deleteLocalTodo, updateLocalTodo, resetTodos } = todoSlice.actions;
+export const { resetError, addLocalTodo, deleteLocalTodo, updateLocalTodo, resetTodos, search } = todoSlice.actions;
 
 export default todoSlice.reducer;

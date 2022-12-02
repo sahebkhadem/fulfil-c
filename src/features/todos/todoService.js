@@ -16,14 +16,14 @@ const createTodo = async (username, todo, token) => {
 };
 
 // Get user todos
-const getTodos = async (username, start, token) => {
+const getTodos = async (username, start, query, token) => {
 	const config = {
 		headers: {
 			Authorization: `Bearer ${token}`
 		}
 	};
 
-	const response = await axios.post(`${BASE_URL}/${username}/todos`, { start }, config);
+	const response = await axios.post(`${BASE_URL}/${username}/todos`, { start, query }, config);
 
 	return response.data;
 };
