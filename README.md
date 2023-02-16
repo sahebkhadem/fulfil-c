@@ -16,6 +16,16 @@ Fulfil is a classic To-Do application where a user can write down all the things
 -   User can assign colors to to-do's
 -   User can create an account so the to-do's will be stored and when the User returns, the data will be retrieved
 
-##
+## Preview images
+Todo form
+![Design preview for the News homepage coding challenge](./src/assets/img/home.png)
+
+Todos
+![Design preview for the News homepage coding challenge](./src/assets/img/todos.png)
+
+Edit todo
+![Design preview for the News homepage coding challenge](./src/assets/img/edit.png)
+
+#
 
 Backend: https://github.com/TakaoIsDaBest/fulfil-s
