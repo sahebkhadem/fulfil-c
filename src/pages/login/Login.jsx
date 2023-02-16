@@ -83,7 +83,7 @@ function Register() {
 
 	return (
 		<main className="page">
-			<Form title="Register" submitHandler={submitHandler}>
+			<Form title="Login" submitHandler={submitHandler}>
 				<TextInput name="username" changeHandler={changeHandler} label="Username" errors={usernameErrors} />
 				<PasswordInput
 					name="password"
