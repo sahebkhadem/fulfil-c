@@ -92,7 +92,7 @@ function Register() {
 	}, [authError]);
 
 	return (
-		<div className="page">
+		<main className="page">
 			<Form title="Register" submitHandler={submitHandler}>
 				<TextInput name="username" changeHandler={changeHandler} label="Username" errors={usernameErrors} />
 				<PasswordInput
@@ -125,7 +125,7 @@ function Register() {
 					Already have an account?
 				</LinkButton>
 			</Form>
-		</div>
+		</main>
 	);
 }
 
